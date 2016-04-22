@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage{acl2016}
+\usepackage{times}
+
+\usepackage{url}
+\usepackage{latexsym}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{mathtools}
+\usepackage{dingbat}
+\usepackage{subcaption}
+\usepackage{balance}
+\usepackage{gensymb}
+\usepackage{marginnote}
+\usepackage{adjustbox}
+
+\makeatletter
+\newcommand{\@BIBLABEL}{\@emptybiblabel}
+\newcommand{\@emptybiblabel}[1]{}
+\makeatother
+\usepackage{hyperref}
+
+\sloppy
+
+% \aclfinalcopy % Uncomment this line for the final submission
+% \def\aclpaperid{34} %  Enter the acl Paper ID here
+
+
+\usepackage{color}
+\newcommand{\todo}[1]{}
+\renewcommand{\todo}[1]{{\color{red} TODO: {#1}}}
+
+%\renewcommand{\baselinestretch}{0.95}
+
+%\setlength\titlebox{5cm}
+
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
+
+\title{On Similarity}
+
+% \author{First Author \\
+%   Affiliation / Address line 1 \\
+%   Affiliation / Address line 2 \\
+%   Affiliation / Address line 3 \\
+%   {\tt email@domain} \\\And
+%   Second Author \\
+%   Affiliation / Address line 1 \\
+%   Affiliation / Address line 2 \\
+%   Affiliation / Address line 3 \\
+%   {\tt email@domain} \\}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% \begin{abstract}
+% % \input{abstract.tex}
+% \end{abstract}
+
+% \section{Introduction}
+% \label{sec:introduction}
+
+Word occurrence patterns define its meaning \cite{firth1957lingtheory}. Moreover, the difference in occurrence quantifies the difference in meaning \cite{harris1954distributional}. The field of distributional semantics studies how and to what extent word meaning can be captured \cite{Turney:2010:FMV:1861751.1861756}. The evaluation of the models is usually done by comparing model's estimates with human judgements of relatedness (e.g.,~MEN \newcite{Bruni:2012:DST:2390524.2390544}) or similarity (e.g., SimLex-999~\newcite{hill2014simlex}).
+
+There is a number of flaws in the current evaluation methods, which this paper addresses.
+
+Intuitively, similarity is the amount of common properties between the entities, and is implemented as a contrast model where ``the similarity between objects is expressed as a function of their common and distinctive features'' \cite{Tversky1977}. However, the similarity scores presented by the datasets are ambiguous as it is not really clear what low similarity values mean: incompatible notions (\textit{trick} and \textit{size}) or contrast in meaning (\textit{smart} and \textit{dumb}). For example, SimLex-999 assigns low similarity scores to the pairs, 0.48 and 0.55 out of 10 respectively, but \textit{smart} and \textit{dumb} relatively have much more in common than \textit{trick} and \textit{size}.
+
+The presence of incompatible pairings such as \textit{trick} and \textit{size} can be motivated by an attempt to control for false positives in the case when the correlation between the model predictions and the human judgements is used as evaluation. For vector space models, a large amount of random pairings\footnotemark{} might influence a particular arrangements of the clusters of similar words, for example, the cluster of fruit names has to be between the cluster of ``furious adjectives'' and ``mass nouns'', even if such arrangement was not intended by the dataset creators.
+
+\footnotetext{15\% of MEN entries have score less or equal to 10 out of 50 and by design 1000 word pairs are sampled from pairs that are assigned low cosine similarity scores by a text-based distributional model.}
+
+
+Semantic models of meaning presuppose a special way of arranging words meaning focusing on the fact that words with similar meaning are close to each other, while it is less important how far and where are the words with dissimilar meanings. The evaluation sets should state this implicitly.
+
+
+
+% remove publisher, month etc from conf proceedings:
+% \bibliographystyle{acl-short}
+\bibliographystyle{acl2016}
+\bibliography{references,dmilajevs_publications}
+\balance
+
+\end{document}
