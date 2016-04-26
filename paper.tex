@@ -32,7 +32,7 @@
 \newcommand{\todo}[1]{}
 \renewcommand{\todo}[1]{{\color{red} TODO: {#1}}}
 
-%\renewcommand{\baselinestretch}{0.95}
+% \renewcommand{\baselinestretch}{0.95}
 
 %\setlength\titlebox{5cm}
 
@@ -67,20 +67,26 @@
 % \section{Introduction}
 % \label{sec:introduction}
 
-Word occurrence patterns define its meaning \cite{firth1957lingtheory}. Moreover, the difference in occurrence quantifies the difference in meaning \cite{harris1954distributional}. The field of distributional semantics studies how and to what extent word meaning can be captured \cite{Turney:2010:FMV:1861751.1861756}. The evaluation of the models is usually done by comparing model's estimates with human judgements of relatedness (e.g.,~MEN \newcite{Bruni:2012:DST:2390524.2390544}) or similarity (e.g., SimLex-999~\newcite{hill2014simlex}).
+Similarity plays a crucial role in psychological theories of knowledge and behavior, for example, it is used to classify objects \cite{Tversky1977}.
+%
+Linguistic treatment of semantic similarity is based on two ideas: word occurrence patterns \emph{define} its meaning \cite{firth1957lingtheory}, while the difference in occurrence \textup{quantifies} the difference in meaning \cite{harris1954distributional}.
 
-There is a number of flaws in the current evaluation methods, which this paper addresses.
+Practically, this leads to systems that use similarity to perform natural language processing tasks such as word sense disambiguation \cite{Schutze:1998:AWS:972719.972724}, information retrieval \cite{Salton:1975:VSM:361219.361220} and machine translation \cite{Dagan:1993:CWS:981574.981596}.
 
-Intuitively, similarity is the amount of common properties between the entities, and is implemented as a contrast model where ``the similarity between objects is expressed as a function of their common and distinctive features'' \cite{Tversky1977}. However, the similarity scores presented by the datasets are ambiguous as it is not really clear what low similarity values mean: incompatible notions (\textit{trick} and \textit{size}) or contrast in meaning (\textit{smart} and \textit{dumb}). For example, SimLex-999 assigns low similarity scores to the pairs, 0.48 and 0.55 out of 10 respectively, but \textit{smart} and \textit{dumb} relatively have much more in common than \textit{trick} and \textit{size}.
+In recent years, similarity received a lot of attention as an intrinsic evaluation of meaning representations \cite{mikolov2013efficient,Bruni:2012:DST:2390524.2390544}, because in a complete text processing system it is difficult to measure performance of a single (similarity) component. As a result, a new generation of datasets appeared from the computational linguistics community, for example, MEN \cite{Bruni:2012:DST:2390524.2390544} and SimLex-999 \cite{hill2014simlex}, that surpasses older datasets stemmed in psychology (refer to \newcite{1986-13502-00119860101} for a comprehensive list of datasets) and information retrieval (most notably \newcite{2002:PSC:503104.503110}) in quantity and attention to the evaluated relation.
 
-The presence of incompatible pairings such as \textit{trick} and \textit{size} can be motivated by an attempt to control for false positives in the case when the correlation between the model predictions and the human judgements is used as evaluation. For vector space models, a large amount of random pairings\footnotemark{} might influence a particular arrangements of the clusters of similar words, for example, the cluster of fruit names has to be between the cluster of ``furious adjectives'' and ``mass nouns'', even if such arrangement was not intended by the dataset creators.
+Despite improvement, current similarity datasets deviate from the psychological understanding of similarity. Intuitively, similarity is the amount of common properties between entities, and is implemented as a contrast model where ``the similarity between objects is expressed as a function of their common and distinctive features'' \cite{Tversky1977}.
 
+Categories are determined in terms of focal points, for example fruit names are arranged around the word \textit{fruit} in such a way that it is their nearest neighbor \cite{1986-13502-00119860101}. It is extremely important for a good semantic model to capture this property. Unfortunately, word pair similarity judgements do not capture this, as it is possible to arrange all fruit names close to \textit{fruit} but \textit{fruit} would not be the most common nearest neighbor. Moreover, as \newcite{turney2012domain} points out, categories that emerge from similarity judgements are different from lexical ontologies such as WordNet \cite{Miller:1995:WLD:219717.219748}, for example, \textit{traffic} and \textit{water} might be considered to be similar because of functional similarity exploited in hydrodynamic models of traffic, but their lowest common ancestor in WordNet is \textit{entity}.
+
+Moreover, the similarity scores presented by the datasets are ambiguous as it is not really clear what low similarity values mean: incompatible notions (\textit{trick} and \textit{size}) or contrast in meaning (\textit{smart} and \textit{dumb}). For example, SimLex-999 assigns low similarity scores to the pairs, 0.48 and 0.55 out of 10 respectively, but \textit{smart} and \textit{dumb} have relatively much more in common than \textit{trick} and \textit{size}!
+
+While the presence of incompatible pairings can be motivated as an attempt to control for false positives, they sound unnatural to human. Also, a large amount of random pairings\footnotemark{} might influence a particular arrangement of the clusters of similar words, for example, the cluster of fruit names has to be between the cluster of \textit{furious adjectives} and \textit{mass nouns}, even if such arrangement was not intended by the dataset creators.
 \footnotetext{15\% of MEN entries have score less or equal to 10 out of 50 and by design 1000 word pairs are sampled from pairs that are assigned low cosine similarity scores by a text-based distributional model.}
 
+Evaluation methods need to focus on how well a model is able to recover human similarity intuitions expressed as clusters (e.g~\textit{fruits}, \textit{company} and \textit{mass noun}). It can be seen as a soft multi-class clustering problem \cite{White:2015:WSE:2838931.2838932}, where two entities belong to a same class if there is a similarity judgement for them (e.g.~\textit{apple} and \textit{banana} are similar because they are \textit{fruits}) and the strength is proportional to the number of such judgements.
 
-Semantic models of meaning presuppose a special way of arranging words meaning focusing on the fact that words with similar meaning are close to each other, while it is less important how far and where are the words with dissimilar meanings. The evaluation sets should state this implicitly.
-
-
+This leads two points this paper addresses. The similarity judgements should be collected in a different way which reflects human intuition about similarity. Even though vector space models of meaning measure similarity between words, it should not be (and can not) be contrasted directly with human judgements, instead the model needs to recover the concept clusters that humans define.
 
 % remove publisher, month etc from conf proceedings:
 % \bibliographystyle{acl-short}
@@ -89,3 +95,4 @@ Semantic models of meaning presuppose a special way of arranging words meaning f
 \balance
 
 \end{document}
+
