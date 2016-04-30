@@ -16,12 +16,6 @@
 \usepackage{marginnote}
 \usepackage{adjustbox}
 
-\makeatletter
-\newcommand{\@BIBLABEL}{\@emptybiblabel}
-\newcommand{\@emptybiblabel}[1]{}
-\makeatother
-\usepackage{hyperref}
-
 \sloppy
 
 % \aclfinalcopy % Uncomment this line for the final submission
@@ -67,30 +61,36 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Similarity plays a crucial role in psychological theories of knowledge and behaviour, for example, it is used to classify objects \cite{hahn1997concepts}.
-% TODO: maybe, mention \cite{Kriegeskorte2008}
-% TODO: a nicer transition
-Linguistic treatment of semantic similarity is based on two ideas: word occurrence patterns \emph{define} its meaning \cite{firth1957lingtheory}, while the difference in occurrence \textup{quantifies} the difference in meaning \cite{harris1954distributional}.
+Similarity plays a crucial role in psychological theories of knowledge and behaviour. For example, it is used for classification and conceptualisation \cite{Tversky1977}. \textit{Fruit} is a \emph{category} because it is a useful generalisations in everyday life: fruits are sweet and constitute deserts, so when one is presented an unseen fruit, she can hypothesise that it is served towards the end of a dinner.
 
-Practically, this leads to systems that use similarity to perform natural language processing tasks such as word sense disambiguation \cite{Schutze:1998:AWS:972719.972724}, information retrieval \cite{Salton:1975:VSM:361219.361220} and machine translation \cite{Dagan:1993:CWS:981574.981596}. Because it is difficult to measure performance of a single (similarity) component in a pipliene, similarity datasets became popular among computational linguists to perform intrinsic evaluation of meaning representations.
+Generalisations are extremely powerful in describing a language as well. The verb \textit{runs} requires its subject to be singular. \textit{Verb}, \textit{subject} and \textit{singular} are categories that are used to describe English grammar. When one encounters an unknown word and is told that it is a verb, he will immediately have an idea how to use it assuming that it is used similarly to other English verbs.
+
+Linguistic formalisation of similarity could base on two ideas: word occurrence patterns \emph{define} its meaning \cite{firth1957lingtheory}, while the difference in occurrence \textup{quantifies} the difference in meaning \cite{harris1954distributional}. From computational perspective, this motivates and guides development of similarity components that are embedded into natural language processing systems that deal with tasks such as word sense disambiguation \cite{Schutze:1998:AWS:972719.972724}, information retrieval \cite{Salton:1975:VSM:361219.361220} and machine translation \cite{Dagan:1993:CWS:981574.981596}.
+
+Because it is difficult to measure performance of a single (similarity) component in a pipeline, datasets that focus on similarity are popular among computational linguists. Note that the datasets not only measure potential utility of similarity models in a complex text processing system, but also serve as an empirical test of theories of Firth and Harris in their correspondence to psychological theories.
 
 Two, currently widely used, datasets are MEN \cite{Bruni:2012:DST:2390524.2390544} and SimLex-999 \cite{hill2014simlex}. They are designed especially for meaning representation evaluation and surpass datasets stemmed in psychology\footnote{Refer to \newcite{1986-13502-00119860101} for a comprehensive list of datasets.} and information retrieval \cite{2002:PSC:503104.503110} in quantity and attention to the evaluated relation.
 
-Intuitively, similarity is the amount of common properties between entities, and can be implemented as a contrast model where ``the similarity between objects is expressed as a function of their common and distinctive features'' \cite{Tversky1977}. The datasets control for this property by providing similarity (relatedness) scores between word pairs.
-%
-% TODO: the argument about focal points is still vague, because similarity scores still can express it. Maybe the argument should be given as a combination of centrality and ambiguity of low similarity.
-However, they overlook the following properties:
+Intuitively, similarity is the amount of common properties between entities, and can be implemented as a contrast model where ``the similarity between objects is expressed as a function of their common and distinctive features'' \cite{Tversky1977}. The datasets control for this property by providing similarity (relatedness) scores between word pairs. However, they overlook the following:
 \begin{compactitem}
-    \item Similarity scores group words to categories that are formed around \emph{focal points}, the terms that represent clusters.
-    % For this one needs to have all pairwise pairings or pairings between the focal point and the words of a category for each category.
-    \item Low similarity scores are ambiguous, they might mean dissimilarity between antonymy as between \textit{smart} and \textit{dumb} or absence of similarity in the case of \textit{trick} and \textit{size}.
+    % \item Similarity scores group words to categories that are formed around \emph{focal points}, the terms that represent clusters.
+    % To detect a focal point, one needs similarities between all words, or pairings between the focal point and the words of a category for each category.
+    \item Similarity is measured with respect to something: \textit{apple} is similar to \textit{orange} because both are companies or fruits, but dissimilar because apples grow where oranges do not \cite{hahn1997concepts}.
+    \item Global low similarity scores are ambiguous, they might mean dissimilarity between antonymy as between \textit{smart} and \textit{dumb} or absence of similarity in the case of \textit{trick} and \textit{size}.
+    % TODO: \cite{Roth1983346}
+    % TODO: this also leads to the extension of the similarity task: items are similar *because* of certain respect. Relevant respects have to be identified.
 \end{compactitem}
+%
+Consequently, we argue that a similarity task should be altered, so that a similarity model, instead of estimation of global similarity, provides similarity score together with a \emph{respect} the items are similar to.
 
 % TODO: wrap up the introduction and make a transition to the next sections.
 
-\section{Similarity properties}
+\section{Similarity judgements}
 
-\paragraph{Centrality}
+% TODO: think of "respects". Goodman, Goldstone. Refer to Koen Lamberts & David Shanks "Knowledge, Concepts and Categories" page 51.
+% TODO: "Another possibility is that similarity and concepts are mutually constraining, and that neither presupposes the other." Lamberts&Shanks p. 66.
+
+Similarity is measured with respect to something \cite{}. It is very inaccurate (and probably impossible) to estimate the global similarity of ambiguous terms such as \textit{apple} and \textit{orange}. The two fruits are almost identical with respect to the shape, but have different taste. Both of them are used for juice production, thus have similar agricultural use. On the other hand, both of them are multinational companies, but they operate in different industries: technology and telecommunications. One could say that "\textit{apple}'s similarity to \textit{orange} is 0.8 because they are both textit{fruits}." and "\textit{apple}'s similarity to \textit{orange} is 0.6 because they are companies".
 
 It has been shown empirically that similarity judgements geometrically arrange objects in such a way that the categories are formed around \emph{focal points}. This means that similarity judgements given by humans arrange fruit names around the word \textit{fruit} in such a way that it is their nearest neighbour, making \textit{fruit} the focal point of the category of \textit{fruits} \cite{1986-13502-00119860101}. This property is referred to as \emph{centrality}.
 %
@@ -112,7 +112,7 @@ While the presence of incompatible pairings can be motivated as an attempt to co
 % * items belong to groups, such as fruits, animals, etc.
 % * all items in the group are assessed for similarity
 % * similarity is on the score of -3...+3. Where negative items indicate dissimilarity (hot, cold: -3), positive indicate similarity (hot, warm: 2) and 0 is reserved for incompatible pairs (trick, size:0)
-
+% * mutual constraint: similarity and concepts must be computed simultaneusly. H&C p. 83.
 % TODO: What if we ask not for similarity, but for confusion? Townsend (1971) "Theoretical analysis of an alphabetic confusion matrix".
 % TODO: Sorting seems to be a better fit! Rosenberg & Kim, (1975) "The Method of Sorting as a Data-Gathering Procedure in Multivariate Research".
 
@@ -122,6 +122,16 @@ The similarity judgements should be collected in a different way which reflects 
 
 
 % TODO: discuss antonymy and incompatible notions.
+
+% TODO: Sentence similarity.
+%
+%       How can we measure sentence similarity?
+%
+%         1) Head in context. E.g. "The boy runs." vs. "The girl walks."
+%         2) Full sentence simialrity. For example. "No" and "John took
+%            the cookies" are similar with the respect to the question 
+%            "Do we have cookies?"
+%         3) Transformational approach of either Kolmogorov complexity                  theory or "the number of changes between the referents".
 
 \bibliographystyle{acl2016}
 \bibliography{references,dmilajevs_publications}
