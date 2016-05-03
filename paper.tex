@@ -61,67 +61,48 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Similarity plays a crucial role in psychological theories of knowledge and behaviour. For example, it is used for classification and conceptualisation \cite{Tversky1977}. \textit{Fruit} is a \emph{category} because it is a useful generalisations in everyday life: fruits are sweet and constitute deserts, so when one is presented an unseen fruit, she can hypothesise that it is served towards the end of a dinner.
+Similarity plays a crucial role in psychological theories of knowledge and behaviour. For example, it is used for classification and conceptualisation \cite{Tversky1977}. \textit{Fruit} is a \emph{category} because it is a practical generalisation: Fruits are sweet and constitute deserts, so when one is presented an unseen fruit, she can hypothesise that it is served towards the end of a dinner.
 
 Generalisations are extremely powerful in describing a language as well. The verb \textit{runs} requires its subject to be singular. \textit{Verb}, \textit{subject} and \textit{singular} are categories that are used to describe English grammar. When one encounters an unknown word and is told that it is a verb, he will immediately have an idea how to use it assuming that it is used similarly to other English verbs.
 
-Linguistic formalisation of similarity could base on two ideas: word occurrence patterns \emph{define} its meaning \cite{firth1957lingtheory}, while the difference in occurrence \textup{quantifies} the difference in meaning \cite{harris1954distributional}. From computational perspective, this motivates and guides development of similarity components that are embedded into natural language processing systems that deal with tasks such as word sense disambiguation \cite{Schutze:1998:AWS:972719.972724}, information retrieval \cite{Salton:1975:VSM:361219.361220} and machine translation \cite{Dagan:1993:CWS:981574.981596}.
+Linguistic formalisation of similarity bases on two ideas. Word occurrence patterns \emph{define} its meaning \cite{firth1957lingtheory}, while the difference in occurrence \textup{quantifies} the difference in meaning \cite{harris1954distributional}. From computational perspective, this motivates and guides development of similarity components that are embedded into natural language processing systems that deal with tasks such as word sense disambiguation \cite{Schutze:1998:AWS:972719.972724}, information retrieval \cite{Salton:1975:VSM:361219.361220} and machine translation \cite{Dagan:1993:CWS:981574.981596}.
 
-Because it is difficult to measure performance of a single (similarity) component in a pipeline, datasets that focus on similarity are popular among computational linguists. Note that the datasets not only measure potential utility of similarity models in a complex text processing system, but also serve as an empirical test of theories of Firth and Harris in their correspondence to psychological theories.
+Because it is difficult to measure performance of a single (similarity) component in a pipeline, datasets that focus on similarity are popular among computational linguists. Apart from a pragmatic attempt to alleviate the evaluation of similarity components, these datasets serve as an empirical test of theories of Firth and Harris, merging together our understanding of human mind, language and technology.
 
-Two, currently widely used, datasets are MEN \cite{Bruni:2012:DST:2390524.2390544} and SimLex-999 \cite{hill2014simlex}. They are designed especially for meaning representation evaluation and surpass datasets stemmed in psychology\footnote{Refer to \newcite{1986-13502-00119860101} for a comprehensive list of datasets.} and information retrieval \cite{2002:PSC:503104.503110} in quantity and attention to the evaluated relation.
+Two datasets, namely MEN \cite{Bruni:2012:DST:2390524.2390544} and SimLex-999 \cite{hill2014simlex}, are currently widely used. They are designed especially for meaning representation evaluation and surpass datasets stemmed in psychology \cite{1986-13502-00119860101} and information retrieval \cite{2002:PSC:503104.503110} in quantity and attention to the evaluated relation.
 
-Intuitively, similarity is the amount of common properties between entities, and can be implemented as a contrast model where ``the similarity between objects is expressed as a function of their common and distinctive features'' \cite{Tversky1977}. The datasets control for this property by providing similarity (relatedness) scores between word pairs. However, they overlook the following:
+Intuitively, similarity is the amount of common properties between entities, and can be implemented as a contrast model where ``the similarity between objects is expressed as a function of their common and distinctive features'' \cite{Tversky1977}. The datasets control for this property by providing similarity (relatedness) scores between word pairs, which provide \emph{global} similarity and overlook two aspects of similarity (relatedness):
 \begin{compactitem}
     % \item Similarity scores group words to categories that are formed around \emph{focal points}, the terms that represent clusters.
     % To detect a focal point, one needs similarities between all words, or pairings between the focal point and the words of a category for each category.
     \item Similarity is measured with respect to something: \textit{apple} is similar to \textit{orange} because both are companies or fruits, but dissimilar because apples grow where oranges do not \cite{hahn1997concepts}.
-    \item Global low similarity scores are ambiguous, they might mean dissimilarity between antonymy as between \textit{smart} and \textit{dumb} or absence of similarity in the case of \textit{trick} and \textit{size}.
+    \item Similarity scores presented by the datasets are ambiguous as it is not really clear what low similarity values mean: incompatible notions (\textit{trick} and \textit{size}) or contrast in meaning (\textit{smart} and \textit{dumb}). For example, SimLex-999 assigns low similarity scores to the pairs, 0.48 and 0.55 out of 10 respectively, but \textit{smart} and \textit{dumb} have relatively much more in common than \textit{trick} and \textit{size}!
+
     % TODO: \cite{Roth1983346}
     % TODO: this also leads to the extension of the similarity task: items are similar *because* of certain respect. Relevant respects have to be identified.
 \end{compactitem}
 %
-Consequently, we argue that a similarity task should be altered, so that a similarity model, instead of estimation of global similarity, provides similarity score together with a \emph{respect} the items are similar to.
+Consequently, we argue that a similarity task should be altered, so that a similarity model, instead of estimation of global similarity, provides similarity score together with a \emph{respect} the items are similar to \cite{hahn1997concepts}.
 
 % TODO: wrap up the introduction and make a transition to the next sections.
 
-\section{Similarity judgements}
+\section{Treating similarity with respect}
 
 % TODO: think of "respects". Goodman, Goldstone. Refer to Koen Lamberts & David Shanks "Knowledge, Concepts and Categories" page 51.
 % TODO: "Another possibility is that similarity and concepts are mutually constraining, and that neither presupposes the other." Lamberts&Shanks p. 66.
 
-Similarity is measured with respect to something \cite{}. It is very inaccurate (and probably impossible) to estimate the global similarity of ambiguous terms such as \textit{apple} and \textit{orange}. The two fruits are almost identical with respect to the shape, but have different taste. Both of them are used for juice production, thus have similar agricultural use. On the other hand, both of them are multinational companies, but they operate in different industries: technology and telecommunications. One could say that "\textit{apple}'s similarity to \textit{orange} is 0.8 because they are both textit{fruits}." and "\textit{apple}'s similarity to \textit{orange} is 0.6 because they are companies".
+Similarity is measured with respect to something \cite{Roth1983346,Sadler1993}. It is very inaccurate (and probably impossible) to estimate the global similarity of ambiguous terms such as \textit{apple} and \textit{orange}. The two fruits are almost identical with respect to the shape, but have different taste. Both of them are used for juice production, thus have similar agricultural use. On the other hand, both of them are multinational companies, but they operate in different industries: technology and telecommunications. One could say that "\textit{apple}'s similarity to \textit{orange} is 8 out of 10 because they are both \textit{fruits}" and "as a company, \textit{apple}'s similarity to \textit{orange} is 6 out of 10." The context similarity is measured in is called \emph{respect} \cite{hahn1997concepts}.
 
-It has been shown empirically that similarity judgements geometrically arrange objects in such a way that the categories are formed around \emph{focal points}. This means that similarity judgements given by humans arrange fruit names around the word \textit{fruit} in such a way that it is their nearest neighbour, making \textit{fruit} the focal point of the category of \textit{fruits} \cite{1986-13502-00119860101}. This property is referred to as \emph{centrality}.
-%
-It is extremely important for a good semantic model to capture this property. Unfortunately, word pair similarity judgements do not capture this, as it is possible to arrange all fruit names close to \textit{fruit} but \textit{fruit} would not be the most common nearest neighbour. 
+Once a representative number of similarity judgements is collected, a global similarity can be estimated by simply ignoring the respects. However, the respects themselves convey an important information. Hypothetically, a dominant respect between fruits is \textit{fruit}, cars is \textit{car} and so on. Thus, respects can be seen clusters, which similarity models need to identify. This solves the problem of ambiguity of low similarity scores, since there is not need to compare incompatible pairs. If there is no respect that ``connects'' two notions, this means that there is no similarity relation between them.
+% TODO: is it clear enough?
 
-To complicate the matter, existing lexical databases such as WordNet \cite{Miller:1995:WLD:219717.219748} can not be used to control for centrality. As \newcite{turney2012domain} points out, categories that emerge from similarity judgements are different from taxonomies defined in those databases. For example, \textit{traffic} and \textit{water} might be considered to be similar because of functional similarity exploited in hydrodynamic models of traffic, but their lowest common ancestor in WordNet is \textit{entity}.
+Clustering is appealing because of another factor. If a category has a superordinate, similarity judgements arrange objects around it \cite{1986-13502-00119860101}. For example, similarity judgements given by humans arrange fruit names around the word \textit{fruit} in such a way that it is their nearest neighbour, making \textit{fruit} the \emph{focal point} of the category of \textit{fruits}. As an additional evaluation method, the model should be able to retrieve focal points. Note, however, that existing lexical databases such as WordNet \cite{Miller:1995:WLD:219717.219748} can not be used to recognise focal points. As \newcite{turney2012domain} points out, categories that emerge from similarity judgements are different from taxonomies. For example, \textit{traffic} and \textit{water} might be considered to be similar because of functional similarity exploited in hydrodynamic models of traffic, but their lowest common ancestor in WordNet is \textit{entity}.
 
-\paragraph{Ambiguity}
+We propose to extend the similarity model evaluation to include classification, to overcome difficulties of uncontextualised similarity scores which might be due to the fact the similarity and concepts are computed simultaneously by humans \cite{hahn1997concepts}.
 
-Another issue is that the similarity scores presented by the datasets are ambiguous as it is not really clear what low similarity values mean: incompatible notions (\textit{trick} and \textit{size}) or contrast in meaning (\textit{smart} and \textit{dumb}). For example, SimLex-999 assigns low similarity scores to the pairs, 0.48 and 0.55 out of 10 respectively, but \textit{smart} and \textit{dumb} have relatively much more in common than \textit{trick} and \textit{size}!
+\section{Phrase and sentence similarity}
 
-While the presence of incompatible pairings can be motivated as an attempt to control for false positives, they sound unnatural to human. Also, a large amount of random pairings\footnotemark{} might influence a particular arrangement of the clusters of similar words, for example, the cluster of \textit{fruits} has to be between the cluster of \textit{furious adjectives} and \textit{mass nouns}, even if such arrangement was not intended by the dataset creators.
-\footnotetext{15\% of MEN entries have score less or equal to 10 out of 50 and by design 1000 word pairs are sampled from pairs that are assigned low cosine similarity scores by a text-based distributional model.}
-
-\section{Dataset design}
-
-% Some of the properties:
-%
-% * items belong to groups, such as fruits, animals, etc.
-% * all items in the group are assessed for similarity
-% * similarity is on the score of -3...+3. Where negative items indicate dissimilarity (hot, cold: -3), positive indicate similarity (hot, warm: 2) and 0 is reserved for incompatible pairs (trick, size:0)
-% * mutual constraint: similarity and concepts must be computed simultaneusly. H&C p. 83.
-% TODO: What if we ask not for similarity, but for confusion? Townsend (1971) "Theoretical analysis of an alphabetic confusion matrix".
-% TODO: Sorting seems to be a better fit! Rosenberg & Kim, (1975) "The Method of Sorting as a Data-Gathering Procedure in Multivariate Research".
-
-Evaluation methods need to focus on how well a model is able to recover human similarity intuitions expressed as groupings around their focal points (e.g~\textit{fruits}, \textit{companies} and \textit{mass nouns}). We propose to treat it as a soft multi-class clustering problem \cite{White:2015:WSE:2838931.2838932}, where two entities belong to a same class if there is a similarity judgement for them (e.g.~\textit{apple} and \textit{banana} are similar because they are \textit{fruits}) and the strength is proportional to the number of such judgements, so we could express that \textit{apple} is more a \textit{fruit} than a \textit{company}.
-
-The similarity judgements should be collected in a different way which reflects human intuition about similarity. Even though vector space models of meaning measure similarity between words, it should not be (and can not) be contrasted directly with human judgements, instead the model needs to recover the concept clusters that humans define.
-
-
-% TODO: discuss antonymy and incompatible notions.
+In the previous section we illustrated similarity with examples between word pairs. 
 
 % TODO: Sentence similarity.
 %
@@ -131,7 +112,14 @@ The similarity judgements should be collected in a different way which reflects 
 %         2) Full sentence simialrity. For example. "No" and "John took
 %            the cookies" are similar with the respect to the question 
 %            "Do we have cookies?"
-%         3) Transformational approach of either Kolmogorov complexity                  theory or "the number of changes between the referents".
+%         3) Transformational approach of either Kolmogorov complexity theory or "the number of changes between the referents".
+%         4) Truth conditional equivalence and possible words.
+
+
+\section{Conclustion}
+
+Similarity evaluation needs to focus on how well a model is able to recover human similarity intuitions expressed as groupings, possibly around their focal points. We propose to treat it as a soft multi-class clustering problem \cite{White:2015:WSE:2838931.2838932}, where two entities belong to a same class if there is a similarity judgement for them (e.g.~\textit{apple} and \textit{banana} are similar because they are \textit{fruits}) and the strength is proportional to the number of such judgements, so we could express that \textit{apple} is more a \textit{fruit} than a \textit{company}.
+
 
 \bibliographystyle{acl2016}
 \bibliography{references,dmilajevs_publications}
