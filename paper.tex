@@ -35,7 +35,7 @@
 % smaller than 5cm (the original size); we will check this
 % in the camera-ready version and ask you to change it back.
 
-\title{On Similarity}
+\title{Treating Similarity with Respect: Recommendations on Evaluation of Models of Meaning}
 
 % \author{First Author \\
 %   Affiliation / Address line 1 \\
@@ -61,7 +61,7 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Similarity plays a crucial role in psychological theories of knowledge and behaviour. For example, it is used for classification and conceptualisation \cite{Tversky1977}. \textit{Fruit} is a \emph{category} because it is a practical generalisation: Fruits are sweet and constitute deserts, so when one is presented with an unseen fruit, one can hypothesise that it is served towards the end of a dinner.
+Similarity is the degree of resemblance between two objects or events \cite{WCS:WCS1282} and plays a crucial role in psychological theories of knowledge and behaviour, where it is used to explain such phenomena as classification and conceptualisation. \textit{Fruit} is a \emph{category} because it is a practical generalisation. Fruits are sweet and constitute deserts, so when one is presented with an unseen fruit, one can hypothesise that it is served towards the end of a dinner.
 
 Generalisations are extremely powerful in describing a language as well. The verb \textit{runs} requires its subject to be singular. \textit{Verb}, \textit{subject} and \textit{singular} are categories that are used to describe English grammar. When one encounters an unknown word and is told that it is a verb, one will immediately have an idea how to use it assuming that it is used similarly to other English verbs.
 
@@ -69,25 +69,13 @@ Semantic formalisation of similarity bases on two ideas. Word occurrence pattern
 
 Because it is difficult to measure performance of a single (similarity) component in a pipeline, datasets that focus on similarity are popular among computational linguists. Apart from a pragmatic attempt to alleviate the evaluation of similarity components, these datasets serve as an empirical test of the hypotheses of Firth and Harris, merging together our understanding of human mind, language and technology.
 
-Two datasets, namely MEN \cite{Bruni:2012:DST:2390524.2390544} and SimLex-999 \cite{hill2014simlex}, are currently widely used. They are designed especially for meaning representation evaluation and surpass datasets stemming from psychology \cite{1986-13502-00119860101} and information retrieval \cite{2002:PSC:503104.503110} in quantity by having more entries and, in case of SimLex-999, attention to the evaluated relation by distinguishing similarity from relatedness.
+Two datasets, namely MEN \cite{Bruni:2012:DST:2390524.2390544} and SimLex-999 \cite{hill2014simlex}, are currently widely used. They are designed especially for meaning representation evaluation and surpass datasets stemming from psychology \cite{1986-13502-00119860101} and information retrieval \cite{2002:PSC:503104.503110} in quantity by having more entries and, in case of SimLex-999, attention to the evaluated relation by distinguishing similarity from relatedness. The datasets provide \emph{global} similarity (relatedness) scores between word pairs.
 
-Similarity is the degree of resemblance between two objects or events \cite{WCS:WCS1282}. It can be implemented as a Contrast Model where the similarity between objects is expressed as a function of their common and distinctive features \cite{Tversky1977}. The datasets provide \emph{global} similarity (relatedness) scores between word pairs. Global similarity refers to an overall comparison \cite{hahn1997concepts} and is restricted with regard to the following observations:
-\begin{compactitem}
-    % \item Similarity scores group words to categories that are formed around \emph{focal points}, the terms that represent clusters.
-    % To detect a focal point, one needs similarities between all words, or pairings between the focal point and the words of a category for each category.
-    % TODO: the point should be against gathering global similarity, as most probably people will think of a respect when they give a similarity judgement.
-    \item ``[S]imilarity\ldots is a relationship between two objects \emph{under a given description}'' \cite{WCS:WCS1282}. Global similarity judgements omit the description and possibly give imprecise global similarity. Is \textit{apple}'s similarity to \textit{orange} as a company the same as a fruit? Is \textit{apple}'s and \textit{orange}'s taste as similar as their geographical spread?
-    \item Similarity scores presented by the datasets are ambiguous as it is not really clear what low similarity values mean: incompatible notions (\textit{trick} and \textit{size}) or contrast in meaning (\textit{smart} and \textit{dumb}). For example, SimLex-999 assigns low similarity scores to the pairs, 0.48 and 0.55 out of 10 respectively, but \textit{smart} and \textit{dumb} have relatively much more in common than \textit{trick} and \textit{size}!
+In contrast to linguistic datasets, datasets that come from psychology contain entries that belong to a single category such as \textit{verbs of judging} \cite{FILLENBAUM197454}. This design decision might be motivated because similarity comparison seem to presuppose some amount or type of similarity. Moreover, because of the \emph{extension effect} \cite{medin1993respects}, the similarity of two entries in a context is less than the similarity between the same entries when the context is extended. ``For example, \textit{black} and \textit{white} received a similarity rating of 2.2 when presented by themselves; this rating increased to 4.0 when \textit{black} was simultaneously compared with \textit{white} and \textit{red} (\textit{red} only increased 4.2 to 4.9).'' \cite{medin1993respects}. In the first case \textit{black} and \textit{white} are more dissimilar because they are located on the extremes of the greyscale, but in the presence of \textit{red} they become more similar because they are both monochromes.
 
-    % TODO: \cite{Roth1983346}
-    % TODO: this also leads to the extension of the similarity task: items are similar *because* of certain respect. Relevant respects have to be identified.
-\end{compactitem}
-%
-Consequently, we argue that a similarity task should be altered, so that a similarity model, instead of estimation of global similarity, provides similarity score together with a \emph{respect} the items are similar to \cite{hahn1997concepts}.
+Both MEN and SimLex provide pairs that do not share any similarity to control for false positives, and they do not control for the comparison scale. This makes similarity judgements ambiguous as it is not clear what low similarity values mean: incompatible notions or contrast in meaning. SimLex-999 assigns low similarity scores to the incompatible pairs (0.48, \textit{trick} \textit{size}) and to antonymy (0.55, \textit{smart} and \textit{dumb}), but \textit{smart} and \textit{dumb} have relatively much more in common than \textit{trick} and \textit{size}!
 
-% TODO: wrap up the introduction and make a transition to the next sections.
-
-\section{Treating similarity with respect}
+\section{Evaluation strategy}
 
 % TODO: think of "respects". Goodman, Goldstone. Refer to Koen Lamberts & David Shanks "Knowledge, Concepts and Categories" page 51.
 % TODO: "Another possibility is that similarity and concepts are mutually constraining, and that neither presupposes the other." Lamberts&Shanks p. 66.
