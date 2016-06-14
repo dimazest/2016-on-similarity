@@ -36,7 +36,8 @@
 % smaller than 5cm (the original size); we will check this
 % in the camera-ready version and ask you to change it back.
 
-\title{Treating Similarity with Respect: How to Evaluate Models of Meaning?}
+% \title{Treating Similarity with Respect: How to Evaluate Models of Meaning?}
+\title{A Proposal for Multi-category Lexical and Sentential Similarity Datasets Based on Commonality Lists}
 
 \author{Dmitrijs Milajevs \\
   Queen Mary University of London \\
@@ -114,27 +115,21 @@ Similarity evaluation needs to focus on how well a model is able to recover huma
 
 In contrast to the current evaluation based on correlation, models also need to be tested on the geometric arrangement of subordinates around the focal points, as only the proximity based evaluation does not capture this \cite{1986-13502-00119860101}.
 
-% \section{Similarity in Context}
-
-% In the previous section we focused on the properties of similarity, illustrating it with word-word examples. This section is dedicated to the nuances of similarity measurement between words, phrases and sentences. Here, we assume that similarity requires the agreement of the grammatical roles.
-
-% \section{Constructions and Language Sub-systems}
 \section{Sentence Similarity}
 
 The question of sentence similarity is more complex because sentences in many ways are different entities than words. Or are they? Linguistics has recently often pointed toward a continuum which exists between words and sentences \cite{jackendoff2012cambridge}. \newcite{jackendoff2005nature}, for example, point out that there is good evidence that ``human memory must store linguistic expressions of all sizes.'' These linguistic expressions of variable size are often called \emph{constructions}. Several computational approaches to constructions have been proposed \cite{Gaspers2011,chang2012computational}, but to the authors' best knowledge they do not yet feature prominently in natural language processing.
 
-To be able to measure similarity of phrases and sentences in the proposed framework, we need to be able to identify what could serve as commonalities between them. So what are they?
+To be able to measure similarity of phrases and sentences in the proposed framework, we need to be able to identify what could serve as commonalities between them. So what are they? First of all, words, sentences and other constructions draw attention to \emph{states of affairs} around us. 
+% This is both pragmatically and semantically speaking the case.
 
-Words, sentences and other constructions draw attention to states of affairs around us. This is both pragmatically and semantically speaking the case. As \newcite{tomasello2009cultural} points out, speakers of English can make sense of phrases like \textit{``X floosed Y the Z.''} and \textit{``X was floosed by Y.''} This is due to their similarity to sentences such as \textit{``John gave Mary the book.''} and \textit{``Mary was kissed by John.''} respectively.
+\paragraph{Prototype effect}
 
-The point here is that some sentences are similar to others with respect to the \emph{functions} they perform. For example, \textit{``X floosed Y the Z.''} is clearly a \emph{``transfer of possession"} or \emph{dative} \cite{bresnan2007predicting}.
+Some sentences are similar to others with respect to the functions they perform. As \newcite{tomasello2009cultural} points out, speakers of English can make sense of phrases like \textit{X floosed Y the Z} and \textit{X was floosed by Y}. This is due to their similarity to sentences such as \textit{John gave Mary the book} and \textit{Mary was kissed by John} respectively. Thus, \textit{X floosed Y the Z} is clearly a \emph{transfer of possession} or \emph{dative} \cite{bresnan2007predicting}.
 
-% As pointed out above, once one has categories one can speak of similarity. 
-
-Thus, the amount in which sentences are similar, at least to a certain extent, corresponds to the function of a given sentence. \newcite{tomasello1998return} points out that sentence-level constructions show prototype effects similar to those discussed above for lexical systems (e.g.~colours). Consider the following sentences:
+The amount in which sentences are similar, at least to a certain extent, corresponds to the function of a given sentence. \newcite{tomasello1998return} points out that sentence-level constructions show \emph{prototype effects} similar to those discussed above for lexical systems (e.g.~colours). Consider the following sentences:
 \begin{compactitem}
-    \item \textit{``John gave Mary the book.''} is a example of an \emph{Agent Causes Transfer} construction. These usually are build around words such as \textit{give, pass, hand, toss, bring, etc.}
-      \item \textit{``John promised Mary the book.''} is a example of an \emph{Conditional transfer} construction. These usually are build around words such as \textit{promise, guarantee, owe, etc.}
+    \item \textit{John gave Mary the book.} is a example of an \emph{Agent Causes Transfer} construction. These usually are build around words such as \textit{give, pass, hand, toss, bring, etc.}
+      \item \textit{John promised Mary the book.} is a example of an \emph{Conditional transfer} construction. These usually are build around words such as \textit{promise, guarantee, owe, etc.}
     %   \item \textit{``John denied Mary the book.''} is a example of an \emph{Agent Prevents Transfer} construction. These usually are build around words such as \textit{refuse, deny, etc.}
     %   \item \textit{``John left Mary the book''} is a example of an \emph{Future Transfer} construction. These usually are build around words such as \textit{bequeath, leave, reserve, grant, etc.}
     %   \item \textit{``John allowed Mary one book''} is a example of an \emph{Enabling Conditions for Transfer} construction. These usually are build around words such as \textit{permit, allow, etc.}
@@ -143,17 +138,25 @@ Thus, the amount in which sentences are similar, at least to a certain extent, c
 
 As soon as one has such a prototype network, one can actually decide sentence similarity as one can say with respect to what sentences and utterances are similar. 
 
-However, these categories work on the semantic-grammatical level, and might be handled by \emph{similarity in context}: a noun phrase can be similar to a noun as in \textit{female lion} and \textit{lioness}, and to another noun phrases as in \textit{yellow car} and \textit{cheap taxi}. The same similarity principle can be applied to phrases as to words. In this case, similarity is measured in context, but is still comparison of the phrases' head words which meaning is modified by arguments they appear with \cite{Kintsch2001173,mitchell-lapata:2008:ACLMain,mitchell2010composition,Dinu:2010:MDS:1870658.1870771,Baroni2010nouns,thater-furstenau-pinkal:2011:IJCNLP-2011,Seaghdha:2011:PMS:2145432.2145545}. With verbs this idea can be applied to compare transitive verbs with intransitive. For example, \textit{to cycle} is similar to \textit{to ride a bicycle}.
+\paragraph{Similarity in Context}
+
+However, prototype categories work on the semantic-grammatical level, and might be handled by \emph{similarity in context}: a noun phrase can be similar to a noun as in \textit{female lion} and \textit{lioness}, and to another noun phrases as in \textit{yellow car} and \textit{cheap taxi}. The same similarity principle can be applied to phrases as to words. In this case, similarity is measured in context, but is still comparison of the phrases' head words which meaning is modified by arguments they appear with \cite{Kintsch2001173,mitchell-lapata:2008:ACLMain,mitchell2010composition,Dinu:2010:MDS:1870658.1870771,Baroni2010nouns,thater-furstenau-pinkal:2011:IJCNLP-2011,Seaghdha:2011:PMS:2145432.2145545}. With verbs this idea can be applied to compare transitive verbs with intransitive. For example, \textit{to cycle} is similar to \textit{to ride a bicycle}.
 
 Sentential similarity might be treated as the similarity of the heads in the contexts. That is, the similarity between \textit{sees} and \textit{notices} in \textit{John \textbf{sees} Mary} and \textit{John \textbf{notices} a woman}. This approach abstracts away grammatical difference between the sentences and concentrates on semantics and fits the proposed model as the respect for the head, which is a lexical entity, has to be found.
 
 % TODO: mention \cite{wieting2015paraphrase}
 
-But still, what about pragmatics? As \newcite{Steels2008} points out, sentences and words draw attention and do not always directly point or refer to entities and actions in the world. For example, he points to the fact that if a person asks another person to \textit{``pass the wine''} they are actually asking for the \textit{bottle}. The speaker just attracts attention to an object of perception in a given situation.
+\paragraph{Attention Attraction}
+
+But still, what about pragmatics? As \newcite{Steels2008} points out, sentences and words draw attention and do not always directly point or refer to entities and actions in the world. For example, he points to the fact that if a person asks another person to \textit{pass the wine} they are actually asking for the \textit{bottle}. The speaker just attracts attention to an object of perception in a given situation.
+
+\paragraph{Grammaticalisaton and Lexicalisaton}
 
 There are several ways in which that sentence can both be \emph{grammaticalised} and \emph{lexicalised}. For example, \textit{No} and \textit{I've seen John eating them} are similar sentences because they lexicalise the same answer to the question \textit{Do we have cookies?} More generally, this gives rise to dialogue act tags: another way of utterance categorisation, refer to the work of \newcite{kalchbrenner-blunsom:2013:CVSC} and \newcite{milajevs-purver:2014:CVSC}.
 
 Thus, questions, which the sentences answer, are valid respects for similarity explanation, as well as entailment, paraphrase \cite{White:2015:WSE:2838931.2838932} or spatial categories \cite{ritter-EtAl:2015:*SEM2015}. This also motivates the approach of treating sentences on their own and encoding the meaning of a sentence into a vector in such a way that similar sentences are clustered together \cite{DBLP:journals/corr/abs-1003-4394,baroni2014frege,Socher:2012:SCT:2390948.2391084,wieting2015paraphrase,DBLP:journals/corr/HillCK16}.
+
+\paragraph{Discourse Fit}
 
 If one conceptualises sentence similarity with respect to a discourse, then one might ask how different sentences fit in to such a discourse. \newcite{Griffiths2015a} tried to construct two versions of the same dialogue using a bottom-up method. They deconstructed a certain dialogue in a given domain---a receptionist scenario---into \textit{greetings}, \textit{directions} and \textit{farewells}. They used a small custom made corpus for this purpose and created the two dialogues by having people rate the individual utterances by friendliness. The resulting two dialogues were surprisingly uneven. The dialogue was supposed to give instructions to a certain location within a building. The ``friendly version'' was very elaborated and consisted of several sentences:
 \enumsentence{
@@ -171,6 +174,8 @@ The questionnaire is located in Q2-102.
 }
 Often the same functions in dialogue can be performed by as little as one word or several phrases or even a complete story. 
 
+\paragraph{Language Sub-systems and Strategies}
+
 \newcite{Steels2010a} introduces the idea of language sub-systems and language strategies. A language subsystem is a means of expressing certain related or similar meanings. Examples of such sub-systems include:
 \begin{compactitem}
     \item Lexical systems which express colours.
@@ -179,9 +184,11 @@ Often the same functions in dialogue can be performed by as little as one word o
 \end{compactitem}  
 The later is an illustration of a language strategy. In English agent-patient relations are mainly encoded by syntax whereas German would use intonation and a combination or articles and case to convey the same information. Russian in contrast will use morphological devices for the same purpose. 
 
+Above we identified seven criteria by which sentence similarity can be compared.
+
 \section{Conclusion}
 
-In this contribution we discussed the notion of ``similarity'' from an interdisciplinary perspective. We contrasted properties of the similarity relation described in the field of psychology with the characteristics of similarity datasets used in computational linguistics. This lead to the recommendations on how to improve the later by removing low score ambiguity in a multi-category similarity dataset.
+In this contribution we discussed the notion of similarity from an interdisciplinary perspective. We contrasted properties of the similarity relation described in the field of psychology with the characteristics of similarity datasets used in computational linguistics. This lead to the recommendations on how to improve the later by removing low score ambiguity in a multi-category similarity dataset.
 
 In the future, a multi-category similarity dataset should be build that allows evaluation of vector space models of meaning by not only measuring proximity between the points, but also their arrangement to clusters. The same ideas can be used to build phrase and sentence level datasets.
 
