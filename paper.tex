@@ -140,7 +140,7 @@ As soon as one has such a prototype network, one can actually decide sentence si
 
 However, prototype categories work on the semantic-grammatical level, and might be handled by \emph{similarity in context}: a noun phrase can be similar to a noun as in \textit{female lion} and \textit{lioness}, and to another noun phrases as in \textit{yellow car} and \textit{cheap taxi}. The same similarity principle can be applied to phrases as to words. In this case, similarity is measured in context, but is still comparison of the phrases' head words which meaning is modified by arguments they appear with \cite{Kintsch2001173,mitchell-lapata:2008:ACLMain,mitchell2010composition,Dinu:2010:MDS:1870658.1870771,Baroni2010nouns,thater-furstenau-pinkal:2011:IJCNLP-2011,Seaghdha:2011:PMS:2145432.2145545}. With verbs this idea can be applied to compare transitive verbs with intransitive. For example, \textit{to cycle} is similar to \textit{to ride a bicycle}.
 
-Sentential similarity might be treated as the similarity of the heads in the contexts. That is, the similarity between \textit{sees} and \textit{notices} in \textit{John \textbf{sees} Mary} and \textit{John \textbf{notices} a woman}. This approach abstracts away grammatical difference between the sentences and concentrates on semantics and fits the proposed model as the respect for the head, which is a lexical entity, has to be found.
+Sentential similarity might be treated as the similarity of the heads in the contexts. That is, the similarity between \textit{sees} and \textit{notices} in \textit{John \textbf{sees} Mary} and \textit{John \textbf{notices} a woman}. This approach abstracts away grammatical difference between the sentences and concentrates on semantics and fits the proposed model as the respect for the head, which is a lexical entity, has to be found \cite{corbett1993heads}.
 
 % TODO: mention \cite{wieting2015paraphrase}
 
@@ -150,7 +150,7 @@ But still, what about pragmatics? As \newcite{Steels2008} points out, sentences 
 
 \paragraph{Grammaticalisaton and lexicalisaton}
 
-There are several ways in which that sentence can both be \emph{grammaticalised} and \emph{lexicalised}. For example, \textit{No} and \textit{I've seen John eating them} are similar sentences because they lexicalise the same answer to the question \textit{Do we have cookies?} More generally, this gives rise to dialogue act tags: another way of utterance categorisation, refer to the work of \newcite{kalchbrenner-blunsom:2013:CVSC} and \newcite{milajevs-purver:2014:CVSC}.
+There are several ways in which a sentence can both be \emph{grammaticalised} and \emph{lexicalised}. For example, \textit{No} and \textit{I've seen John eating them} are similar sentences because they lexicalise the same answer to the question \textit{Do we have cookies?} More generally, this gives rise to dialogue act tags: another way of utterance categorisation, refer to the work of \newcite{kalchbrenner-blunsom:2013:CVSC} and \newcite{milajevs-purver:2014:CVSC}.
 
 Thus, questions, which the sentences answer, are valid respects for similarity explanation, as well as entailment, paraphrase \cite{White:2015:WSE:2838931.2838932} or spatial categories \cite{ritter-EtAl:2015:*SEM2015}. This also motivates the approach of treating sentences on their own and encoding the meaning of a sentence into a vector in such a way that similar sentences are clustered together \cite{DBLP:journals/corr/abs-1003-4394,baroni2014frege,Socher:2012:SCT:2390948.2391084,wieting2015paraphrase,DBLP:journals/corr/HillCK16}.
 
@@ -172,15 +172,15 @@ The questionnaire is located in Q2-102.
 }
 Often the same functions in dialogue can be performed by as little as one word or several phrases or even a complete story. 
 
-\paragraph{Language Sub-systems and strategies}
+\paragraph{Language sub-systems and strategies}
 
-\newcite{Steels2010a} introduces the idea of language sub-systems and language strategies. A language subsystem is a means of expressing certain related or similar meanings. Examples of such sub-systems include:
+\newcite{Steels2010a} introduces the idea of language sub-systems and language strategies. A language subsystem are the means of expressing certain related or similar meanings. Examples of such sub-systems include:
 \begin{compactitem}
     \item Lexical systems which express colours.
     \item Morphological devices to encode tenses.
     \item Usage of word order to express relations between agent and patient.
 \end{compactitem}  
-The later is an illustration of a language strategy. In English agent-patient relations are mainly encoded by syntax whereas German would use intonation and a combination or articles and case to convey the same information. Russian in contrast will use morphological devices for the same purpose. 
+The later is an illustration of a language strategy. In English agent-patient relations are mainly encoded by syntax whereas German would use intonation and a combination or articles and case to convey the same information. Russian, in contrast, will use morphological devices for the same purpose. 
 
 Above we identified seven criteria by which sentence similarity can be compared.
 
@@ -188,10 +188,7 @@ Above we identified seven criteria by which sentence similarity can be compared.
 
 In this contribution we discussed the notion of similarity from an interdisciplinary perspective. We contrasted properties of the similarity relation described in the field of psychology with the characteristics of similarity datasets used in computational linguistics. This lead to the recommendations on how to improve the later by removing low score ambiguity in a multi-category similarity dataset.
 
-In the future, a multi-category similarity dataset should be build that allows evaluation of vector space models of meaning by not only measuring proximity between the points, but also their arrangement to clusters. The same ideas can be used to build phrase and sentence level datasets.
-
-% At the very end, we need to say something about parsimony or "Occam's razor": Among competing hypotheses, the one with the fewest assumptions should be selected.
-%We are proposing going into a lot of detail in creating datasets and software. How do we leverage that with wide-coverage?  
+In the future, a multi-category similarity dataset should be build that allows evaluation of vector space models of meaning by not only measuring proximity between the points, but also their arrangement to clusters. The same ideas can be used to build phrase- and sentence-level datasets.
 
 On a broader perspective, this work highlights psychological phenomena that being incorporated into the models of meaning are expected to improve their performance.
 
